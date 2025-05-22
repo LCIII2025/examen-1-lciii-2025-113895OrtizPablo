@@ -37,7 +37,31 @@ public class Ticket {
         // por ejemplo si estuvo 45 minutos se le tarifa por 60, si estuvo 80 minutos se le tarifa por 120 minutos, etc...
         // retornar el importe final
 
-        return 0;
+        //Definir el precio a aplicar
+        double precio=0;
+        if(vehiculo.getTipo().equals(Vehiculo.Tipo.AUTO)){
+            precio =100;
+        } else if (vehiculo.getTipo().equals(Vehiculo.Tipo.SUV)) {
+            precio = 130;
+        } else if (vehiculo.getTipo().equals(Vehiculo.Tipo.PICKUP)) {
+            precio = 180;
+        }
+
+        //Definir tiempo
+        Duration duracion = Duration.between(horaEntrada, horaSalida);
+        int totalMinutos = (int)duracion.toMinutes();
+        int minutosRedondeados=0;
+        if(0<=totalMinutos &&totalMinutos<=60){
+            minutosRedondeados=60;
+        } else if (60<totalMinutos &&totalMinutos<=120) {
+            minutosRedondeados =120;
+        }else if (120<totalMinutos &&totalMinutos<=180){
+            minutosRedondeados =180;
+        }else if (180<totalMinutos &&totalMinutos<=200){
+            minutosRedondeados =200;
+        }
+
+        return   precio*minutosRedondeados;
     }
 
 }
